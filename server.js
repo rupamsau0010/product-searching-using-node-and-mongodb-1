@@ -1,7 +1,10 @@
 // Require depandencies
 require("dotenv").config()
 const express = require("express")
-const mongoose = require("mongoose")
+const connect = require("./config/db")
+const enterProduct = require("./controllers/searchControllers")
+const rootRoute = require("./controllers/searchControllers")
+const router = require("./routes/searchRoute")
 
 const app = express()
 
@@ -9,21 +12,12 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-// Connecting MongoDB atlas with the server.js...
-mongoose.connect(process.env.URI, {useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true})
-.then(() => {
-    console.log("Succesfully connected to Database");
-})
-.catch((error) => {
-    console.log(`Connection failed with ${error}`);
-})
+// Connect MongoDB atlas
+connect()
 
 // Besic Get Request to the route route
-app.get("/", (req, res) => {
-    res.json({
-        "alright": true
-    })
-})
+app.use("/api/", rootRoute)
+app.use("/api/", enterProduct)
 
 const port = 3000
 // Running server on port 3000
