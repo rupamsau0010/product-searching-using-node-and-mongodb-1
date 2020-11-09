@@ -2,9 +2,7 @@
 require("dotenv").config()
 const express = require("express")
 const connect = require("./config/db")
-const enterProduct = require("./controllers/searchControllers")
-const rootRoute = require("./controllers/searchControllers")
-const router = require("./routes/searchRoute")
+const searchRoute = require("./routes/searchRoute")
 
 const app = express()
 
@@ -16,8 +14,7 @@ app.use(express.urlencoded({extended: true}))
 connect()
 
 // Besic Get Request to the route route
-app.use("/api/", rootRoute)
-app.use("/api/", enterProduct)
+app.use("/api/", searchRoute)
 
 const port = 3000
 // Running server on port 3000

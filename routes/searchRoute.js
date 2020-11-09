@@ -1,9 +1,9 @@
 const express = require("express")
-const enterProduct = require("../controllers/searchControllers")
-const rootRoute = require("../controllers/searchControllers")
 const router = express.Router()
+const searchControllers = require("../controllers/searchControllers")
 
-router.get("/", rootRoute)
-router.post("/enterNewProduct", enterProduct)
+router.get("/", searchControllers.rootRoute)
+router.post("/enterNewProduct", searchControllers.enterProduct)
+router.get("/searchNewProduct", searchControllers.searchProduct)
 
 module.exports = router
